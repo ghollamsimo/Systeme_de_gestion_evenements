@@ -16,11 +16,11 @@ export class EventUseCase{
         return this.eventRepositoryImpl.index()
     }
 
-    delete(id: string){
-        return this.eventRepositoryImpl.delete(id)
-    }
-
-    update(id: string , eventDTO: EventDTO){
-        return this.eventRepositoryImpl.update(id, eventDTO)
-    }
+    // delete(id: string){
+    //     return this.eventRepositoryImpl.delete(id)
+    // }
+    //
+    // update(id: string , eventDTO: EventDTO){
+    //     return this.eventRepositoryImpl.update(id, eventDTO)
+    // }
 }
