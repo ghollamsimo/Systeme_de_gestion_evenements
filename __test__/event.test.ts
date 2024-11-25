@@ -42,5 +42,16 @@ describe('Event Test' , () => {
 
     it('should call method of update', () => {
         const update = jest.spyOn(eventUseCase, 'update')
+        const id: string = 'test'
+        const eventDTO : EventDTO ={
+            title: 'Test Title',
+            image: 'Test Image',
+            description: 'Test description',
+            participants: ['test', 'test'],
+            organiser: 'test'
+        }
+        eventUseCase.update(id, eventDTO)
+        expect(update).toBeCalledTimes(1)
+        expect(update).toBeCalledWith(id, eventDTO)
     })
 })
