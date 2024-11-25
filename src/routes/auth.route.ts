@@ -1,21 +1,26 @@
 import { Router } from "express";
-import UserController from "../interface/http/userController";
+import {UserController} from "../interface/http/userController";
+import {UserRepositoryImpl} from "../infrastructure/repositories/userRepositoryImpl";
+import {UserUseCase} from "../application/usecases/userUseCase";
 
 const authRouter: Router = Router();
 
+const authRepository = new UserRepositoryImpl();
+const authUseCase = new UserUseCase(authRepository);
+const authController: UserController = new UserController(authUseCase);
 authRouter.post("/auth/register", (req, res): void => {
-    UserController.register(req, res);
+    authController.register(req, res);
 });
 
 authRouter.post('/auth/login', (req, res): void => {
-    UserController.login(req, res);
+    authController.login(req, res);
 })
 
 authRouter.post('/auth/forgot-password', (req, res): void => {
-    UserController.forgotPassword(req, res);
+    authController.forgotPassword(req, res);
 })
 
 authRouter.post('/auth/reset-password', (req, res): void => {
-    UserController.resetPassword(req, res);
+    authController.resetPassword(req, res);
 })
 export default authRouter;
