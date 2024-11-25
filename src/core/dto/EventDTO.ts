@@ -1,15 +1,20 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 
-export class EventDTO{
+export class EventDTO {
     readonly title: string;
     readonly image: string;
     readonly description: string;
-    readonly participant: mongoose.Schema.Types.ObjectId;
+    readonly participants: any
 
-    constructor(title : string, image: string, description: string, participant: mongoose.Schema.Types.ObjectId) {
+    constructor(
+        title: string,
+        image: string,
+        description: string,
+        participants: any
+    ) {
         this.title = title;
         this.image = image;
         this.description = description;
-        this.participant = participant;
+        this.participants = participants;
     }
 }
