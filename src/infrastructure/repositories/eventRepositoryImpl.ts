@@ -19,8 +19,8 @@ export class EventRepositoryImpl implements EventInterface {
     }
 
     async index(): Promise<EventEntity[]> {
-        const events = await this.eventModel.find().populate('participants').exec();
-        return events.map(event => new EventEntity(event.title, event.image, event.description, event.participants));
+        const events = await this.eventModel.find().populate('participants').populate('organiser').exec();
+        return events.map(event => new EventEntity(event.title, event.image, event.description, event.participants, event.organiser));
     }
 
     async store(eventDTO: EventDTO): Promise<EventEntity> {
@@ -29,13 +29,15 @@ export class EventRepositoryImpl implements EventInterface {
             image: eventDTO.image,
             description: eventDTO.description,
             participants: eventDTO.participants,
+            organiser: eventDTO.organiser
         });
 
         return new EventEntity(
             createdEvent.title,
             createdEvent.image,
             createdEvent.description,
-            createdEvent.participants
+            createdEvent.participants,
+            createdEvent.organiser
         );
     }
 
