@@ -18,7 +18,8 @@ describe('Event Test' , () => {
             title: 'Test Title',
             image: 'Test Image',
             description: 'Test description',
-            participants: ['test', 'test']
+            participants: ['test', 'test'],
+            organiser: 'test'
         }
         eventUseCase.store(eventDTO)
         expect(store).toBeCalledTimes(1)
@@ -29,5 +30,17 @@ describe('Event Test' , () => {
         const index = jest.spyOn(eventUseCase, 'index')
         eventUseCase.index()
         expect(index).toBeCalledTimes(1)
+    })
+
+    it('should call method of delete' , () => {
+        const deleteMethod = jest.spyOn(eventUseCase, 'delete')
+        const id: string = 'test'
+        eventUseCase.delete(id)
+        expect(deleteMethod).toBeCalledTimes(1)
+        expect(deleteMethod).toBeCalledWith(id)
+    })
+
+    it('should call method of update', () => {
+        const update = jest.spyOn(eventUseCase, 'update')
     })
 })
