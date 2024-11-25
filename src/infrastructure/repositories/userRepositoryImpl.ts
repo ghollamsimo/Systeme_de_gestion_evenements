@@ -26,6 +26,8 @@ export class UserRepositoryImpl implements UserInterface {
             savedUser.password,
             savedUser.role
         );
+
+
     }
 
     async login(loginDTO: LoginDTO): Promise<{ token: string }> {
