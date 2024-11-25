@@ -12,12 +12,13 @@ export class EventController{
         try {
             const { title, description , participants} = req.body;
             const image = req.file?.filename;
-
+            const organiser = req.user?.id
+            console.log('ddd', organiser)
             if (!title || !description || !image) {
                 return res.status(400).json({ success: false, message: "All fields are required, including the image" });
             }
 
-            const eventDto: EventDTO = new EventDTO(title, image, description, participants);
+            const eventDto: EventDTO = new EventDTO(title, image, description, participants, organiser);
 
             const event: EventEntity = await this.eventUseCase.store(eventDto);
             return res.status(201).json({ success: true, data: event });
@@ -51,11 +52,13 @@ export class EventController{
         }
     }
 
-    // async delete(req : Request, res : Response){
-    //     try {
-    //
-    //     }catch (e) {
-    //         res.status(500).json({ success: false, message: e })
-    //     }
-    // }
+    async delete(req : Request, res : Response){
+        try {
+            const {id} = req.params
+            const event = await this.eventUseCase.delete(id)
+            return res.status(200).json({success: true})
+        }catch (e) {
+            res.status(500).json({ success: false, message: e })
+        }
+    }
 }
