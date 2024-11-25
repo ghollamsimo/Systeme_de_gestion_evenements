@@ -2,8 +2,12 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import connectToDB from "./config/settings";
 import authRouter from "./routes/auth.route";
+import path from "path";
+import eventRoute from "./routes/event.route";
 
 dotenv.config();
+
+const uploadsPath = path.join(__dirname, '../uploads');
 
 class Server {
     public app: Application;
@@ -26,6 +30,7 @@ class Server {
 
     private routing(): void {
         this.app.use("/", authRouter);
+        this.app.use("/event", eventRoute);
     }
 
     public async start(): Promise<void> {
