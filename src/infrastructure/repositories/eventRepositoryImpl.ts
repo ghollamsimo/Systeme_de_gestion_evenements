@@ -41,4 +41,12 @@ export class EventRepositoryImpl implements EventInterface {
         );
     }
 
+    async update(id: string, eventDTO: EventDTO): Promise<{ message: string }> {
+        const event = await this.eventModel.findByIdAndUpdate(id, eventDTO, { new: true });
+        if (!event) {
+            throw new Error("Event not found");
+        }
+        return { message: "Event updated successfully" };
+    }
+
 }

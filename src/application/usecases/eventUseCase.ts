@@ -19,8 +19,8 @@ export class EventUseCase{
     delete(id: string){
         return this.eventRepositoryImpl.delete(id)
     }
-    //
-    // update(id: string , eventDTO: EventDTO){
-    //     return this.eventRepositoryImpl.update(id, eventDTO)
-    // }
+
+    update(id: string , eventDTO: EventDTO){
+        return this.eventRepositoryImpl.update(id, eventDTO)
+    }
 }

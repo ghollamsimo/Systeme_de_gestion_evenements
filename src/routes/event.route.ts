@@ -21,4 +21,8 @@ eventRouter.get('/index', (req, res) => {
 eventRouter.delete('/delete/:id', (req, res) => {
     eventController.delete(req, res)
 })
+
+eventRouter.patch('/update/:id',authMiddleware, (req, res) => {
+    eventController.update(req, res)
+})
 export default eventRouter
