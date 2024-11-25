@@ -1,12 +1,14 @@
 import { UserUseCase } from "../src/application/usecases/userUseCase";
 import {LoginDTO} from "../src/core/dto/LoginDTO";
+import {UserRepositoryImpl} from "../src/infrastructure/repositories/userRepositoryImpl";
 
 jest.mock("../src/application/usecases/userUseCase");
 
 describe("Authentication Tests", () => {
     let userUseCase: UserUseCase;
     beforeEach(() => {
-        userUseCase = new UserUseCase;
+        const authRepository = new UserRepositoryImpl();
+        userUseCase = new UserUseCase(authRepository);
     })
     it("should call login method", () => {
         const login = jest.spyOn(userUseCase, "login");
@@ -23,9 +25,10 @@ describe("Authentication Tests", () => {
         const name: string = "Ghollam";
         const email: string = "ghollam@gmail.com";
         const password: string = "password";
-        userUseCase.register(name, email, password);
+        const role: string = "organiser"
+        userUseCase.register(name, email, password, role);
         expect(register).toHaveBeenCalledTimes(1)
-        expect(register).toBeCalledWith(name, email, password);
+        expect(register).toBeCalledWith(name, email, password, role);
         expect(register).toReturn();
     })
 });
