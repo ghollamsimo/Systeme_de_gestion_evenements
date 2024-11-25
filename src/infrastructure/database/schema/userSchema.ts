@@ -15,11 +15,12 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     role: {
-        type: [String],
         enum: ['organiser', 'participant'],
-        default: 'participant'
+        default: 'participant',
+        required: true,
+        type: String
     }
-}, {collection : 'users'});
+}, { collection: 'users' });
 
 const User = mongoose.model('User', userSchema);
 
