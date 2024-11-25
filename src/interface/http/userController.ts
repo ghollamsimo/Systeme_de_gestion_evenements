@@ -4,14 +4,14 @@ import {LoginDTO} from "../../core/dto/LoginDTO";
 import {ForgotDTO} from "../../core/dto/ForgotDTO";
 import {ResetDTO} from "../../core/dto/ResetDTO";
 
-class UserController {
-    private readonly userUseCase
-    constructor() {
-        this.userUseCase = new UserUseCase()
+export class UserController {
+    private readonly userUseCase: UserUseCase
+    constructor(userUseCase : UserUseCase) {
+        this.userUseCase = userUseCase
     }
 
     async register(req: Request, res: Response): Promise<void> {
-        const { name, email, password } = req.body;
+        const { name, email, password, role } = req.body;
 
         if (!name || !email || !password) {
             res.status(400).json({ message: "Name, email, and password are required" });
@@ -19,7 +19,7 @@ class UserController {
         }
 
         try {
-            const user = await this.userUseCase.register( name, email, password );
+            const user = await this.userUseCase.register( name, email, password , role);
             res.status(200).json(user);
         } catch (error) {
             res.status(401).json({ message: 'Invalid username or password' });
@@ -69,4 +69,3 @@ class UserController {
 
 }
 
-export default new UserController()

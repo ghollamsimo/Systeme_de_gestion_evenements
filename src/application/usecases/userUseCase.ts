@@ -5,15 +5,16 @@ import {ForgotDTO} from "../../core/dto/ForgotDTO";
 import {ResetDTO} from "../../core/dto/ResetDTO";
 
 export class UserUseCase {
-    private readonly userRepository;
-    constructor() {
-        this.userRepository = new UserRepositoryImpl()
+    private readonly userRepository: UserRepositoryImpl;
+    constructor(userRepository: UserRepositoryImpl) {
+        this.userRepository = userRepository
     }
 
-    register(name: string, email: string, password: string): Promise<UserEntity>{
-        const user: UserEntity = new UserEntity(name, email, password);
-        return this.userRepository.register(user)
+    register(name: string, email: string, password: string, role: string): Promise<UserEntity> {
+        const user: UserEntity = new UserEntity(name, email, password, role);
+        return this.userRepository.register(user);
     }
+
 
     login(LoginDTO: LoginDTO): Promise<{ token: string }> {
         return this.userRepository.login(LoginDTO);
