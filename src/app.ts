@@ -4,6 +4,7 @@ import connectToDB from "./config/settings";
 import authRouter from "./routes/auth.route";
 import path from "path";
 import eventRoute from "./routes/event.route";
+import organiserRoute from "./routes/organiser.route";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ class Server {
     private routing(): void {
         this.app.use("/", authRouter);
         this.app.use("/event", eventRoute);
+        this.app.use('/organiser', organiserRoute)
     }
 
     public async start(): Promise<void> {
