@@ -29,4 +29,18 @@ describe(' Testing Crud of Participant', () => {
         organiserUseCase.index()
         expect(indexMethod).toBeCalledTimes(1)
     })
+
+    it('should call method of updating', () => {
+        const updateMethod = jest.spyOn(organiserUseCase, 'update')
+        const id: string = 'test'
+        const userDto: UserDto = {
+            name: 'test',
+            email: 'test@example.com',
+            password: 'test',
+            role: 'participant'
+        }
+        organiserUseCase.update(id, userDto)
+        expect(updateMethod).toBeCalledTimes(1)
+        expect(updateMethod).toBeCalledWith(id, userDto)
+    })
 })
