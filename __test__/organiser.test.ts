@@ -23,4 +23,10 @@ describe(' Testing Crud of Participant', () => {
         expect(storeMethod).toBeCalledTimes(1)
         expect(storeMethod).toBeCalledWith(userDto)
     })
+
+    it('should call method of getting', () => {
+        const indexMethod = jest.spyOn(organiserUseCase, 'index')
+        organiserUseCase.index()
+        expect(indexMethod).toBeCalledTimes(1)
+    })
 })
