@@ -1,5 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import connectToDB from "./config/settings";
 import authRouter from "./routes/auth.route";
 import path from "path";
@@ -22,9 +23,13 @@ class Server {
     }
 
     private config(): void {
-        this.app.use((req: Request, res: Response, next: NextFunction): void => {
-            next();
-        });
+        this.app.use(cors({
+            origin: "http://localhost:5173",
+            methods: ["GET", "POST", "PUT", "DELETE"],
+            allowedHeaders: ["Content-Type", "Authorization"],
+            credentials: true,
+        }));
+
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.json());
     }
@@ -32,7 +37,7 @@ class Server {
     private routing(): void {
         this.app.use("/", authRouter);
         this.app.use("/event", eventRoute);
-        this.app.use('/organiser', organiserRoute)
+        this.app.use('/organiser', organiserRoute);
     }
 
     public async start(): Promise<void> {
