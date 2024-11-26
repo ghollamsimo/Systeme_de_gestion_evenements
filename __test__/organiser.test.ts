@@ -43,4 +43,12 @@ describe(' Testing Crud of Participant', () => {
         expect(updateMethod).toBeCalledTimes(1)
         expect(updateMethod).toBeCalledWith(id, userDto)
     })
+
+    it('should call method of deleting', () => {
+        const deleteMethod = jest.spyOn(organiserUseCase, 'delete')
+        const id: string = 'test'
+        organiserUseCase.delete(id)
+        expect(deleteMethod).toBeCalledTimes(1)
+        expect(deleteMethod).toBeCalledWith(id)
+    })
 })
