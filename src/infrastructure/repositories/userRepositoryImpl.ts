@@ -44,7 +44,7 @@ export class UserRepositoryImpl implements UserInterface {
         }
 
         const token = jwt.sign(
-            { id: user._id, name: user.name, email: user.email },
+            { id: user._id, name: user.name, email: user.email, role: user.role },
             process.env.JWT_SECRET!,
             { expiresIn: "1h" }
         );
@@ -57,7 +57,7 @@ export class UserRepositoryImpl implements UserInterface {
             throw new Error('User with this email does not exist');
         }
         const resetToken = jwt.sign(
-            { id: user._id, email: user.email },
+            { id: user._id, email: user.email , role: user.role},
             process.env.JWT_SECRET!,
             { expiresIn: '1h' }
         );
