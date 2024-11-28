@@ -7,7 +7,15 @@ export class EventController{
     private readonly eventUseCase : EventUseCase
 
     constructor(eventUseCase : EventUseCase) {this.eventUseCase = eventUseCase;}
-
+    async show(req: Request, res: Response) {
+        try {
+            const {id} = req.params
+            const event = await this.eventUseCase.show(id)
+            return res.status(200).json(event)
+        }catch (e){
+            res.status(500).json({success: false, message: 'event not found'})
+        }
+    }
     async store(req: Request, res: Response): Promise<Response> {
         try {
             const { title, description , participants} = req.body;

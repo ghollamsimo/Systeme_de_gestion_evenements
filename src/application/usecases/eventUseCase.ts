@@ -23,4 +23,8 @@ export class EventUseCase{
     update(id: string , eventDTO: EventDTO){
         return this.eventRepositoryImpl.update(id, eventDTO)
     }
+
+    show(id: string){
+        return this.eventRepositoryImpl.show(id)
+    }
 }
