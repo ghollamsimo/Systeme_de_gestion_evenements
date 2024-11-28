@@ -54,4 +54,12 @@ describe('Event Test' , () => {
         expect(update).toBeCalledTimes(1)
         expect(update).toBeCalledWith(id, eventDTO)
     })
+
+    it('should call method of show an event', () =>{
+        const show = jest.spyOn(eventUseCase, 'show')
+        const id: string = 'test'
+        eventUseCase.show(id)
+        expect(show).toBeCalledTimes(1)
+        expect(show).toBeCalledWith(id)
+    })
 })
