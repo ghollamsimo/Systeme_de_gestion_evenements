@@ -3,13 +3,22 @@ import { UserUseCase } from "../../application/usecases/userUseCase";
 import {LoginDTO} from "../../core/dto/LoginDTO";
 import {ForgotDTO} from "../../core/dto/ForgotDTO";
 import {ResetDTO} from "../../core/dto/ResetDTO";
+import {UserEntity} from "../../core/entities/userEntity";
 
 export class UserController {
     private readonly userUseCase: UserUseCase
     constructor(userUseCase : UserUseCase) {
         this.userUseCase = userUseCase
     }
-
+    async show(req: Request, res: Response) {
+        try {
+            const {id} = req.params
+            const user = await this.userUseCase.show(id)
+            return res.status(200).json(user)
+        }catch (e){
+            res.status(500).json({success: false, message: 'user not found'})
+        }
+    }
     async register(req: Request, res: Response): Promise<void> {
         const { name, email, password, role } = req.body;
 
@@ -22,7 +31,7 @@ export class UserController {
             const user = await this.userUseCase.register( name, email, password , role);
             res.status(200).json(user);
         } catch (error) {
-            res.status(401).json({ message: 'Invalid username or password' });
+            res.status(401).json({ message: 'Invalid email or password' });
         }
     }
 
