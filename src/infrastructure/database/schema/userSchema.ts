@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
         default: 'participant',
         required: true,
         type: String
-    }
+    },
+    created_at: { type: Date, default: Date.now },
 }, { collection: 'users' });
 
 const User = mongoose.model('User', userSchema);
