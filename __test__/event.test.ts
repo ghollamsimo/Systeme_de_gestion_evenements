@@ -62,4 +62,10 @@ describe('Event Test' , () => {
         expect(show).toBeCalledTimes(1)
         expect(show).toBeCalledWith(id)
     })
+
+    it('should call of stats' , () => {
+        const stats = jest.spyOn(eventUseCase, 'stats')
+        eventUseCase.stats()
+        expect(stats).toBeCalledTimes(1)
+    })
 })
