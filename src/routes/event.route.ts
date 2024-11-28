@@ -18,6 +18,10 @@ eventRouter.get('/index', (req, res) => {
     eventController.index(req, res)
 })
 
+eventRouter.get('/stats', (req, res) => {
+    eventController.stats(req, res)
+})
+
 eventRouter.get('/show/:id', (req, res) => {
     eventController.show(req, res)
 })

@@ -27,4 +27,8 @@ export class EventUseCase{
     show(id: string){
         return this.eventRepositoryImpl.show(id)
     }
+
+    stats(){
+        return this.eventRepositoryImpl.stats()
+    }
 }
