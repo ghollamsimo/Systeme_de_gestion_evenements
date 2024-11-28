@@ -10,6 +10,15 @@ export class UserController {
     constructor(userUseCase : UserUseCase) {
         this.userUseCase = userUseCase
     }
+
+    async stats(req: Request, res: Response){
+        try {
+            const stats = await this.userUseCase.stats()
+            return res.status(200).json(stats);
+        }catch (e){
+            res.status(500).json({success: false, message: e});
+        }
+    }
     async show(req: Request, res: Response) {
         try {
             const {id} = req.params
