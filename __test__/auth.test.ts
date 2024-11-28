@@ -31,4 +31,12 @@ describe("Authentication Tests", () => {
         expect(register).toBeCalledWith(name, email, password, role);
         expect(register).toReturn();
     })
+
+    it('should call method of show that take as argument id and return object of user', () => {
+        const show = jest.spyOn(userUseCase, 'show')
+        const id :string = 'test'
+        userUseCase.show(id)
+        expect(show).toBeCalledWith(id)
+        expect(show).toBeCalledTimes(1)
+    })
 });
