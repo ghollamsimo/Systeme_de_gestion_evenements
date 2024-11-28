@@ -23,4 +23,8 @@ authRouter.post('/auth/forgot-password', (req, res): void => {
 authRouter.post('/auth/reset-password', (req, res): void => {
     authController.resetPassword(req, res);
 })
+
+authRouter.get('/auth/show/:id', (req, res) => {
+    authController.show(req, res);
+})
 export default authRouter;
