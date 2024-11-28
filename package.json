@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -r ts-node/register src/app.ts",
     "test": "cross-env NODE_ENV=test jest",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
