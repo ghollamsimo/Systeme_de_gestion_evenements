@@ -1,8 +1,7 @@
-import { EventInterface } from "../../core/interfaces/eventInterface";
-import { EventEntity } from "../../core/entities/eventEntity";
-import { EventDTO } from "../../core/dto/EventDTO";
+import {EventInterface} from "../../core/interfaces/eventInterface";
+import {EventEntity} from "../../core/entities/eventEntity";
+import {EventDTO} from "../../core/dto/EventDTO";
 import EventModel from "../database/schema/eventSchema";
-import * as events from "events";
 
 export class EventRepositoryImpl implements EventInterface {
     private readonly eventModel;
@@ -55,6 +54,10 @@ export class EventRepositoryImpl implements EventInterface {
             throw new Error('there is no event with this id')
         }
         return this.eventModel.findById(id)
+    }
+
+    stats() {
+        return this.eventModel.countDocuments()
     }
 
 }
