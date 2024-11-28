@@ -8,4 +8,5 @@ export interface EventInterface {
     delete(id: string): Promise<{ message: string }>;
     show(id: string)
     update(id: string, eventDTO: EventDTO): Promise<{ message: string }>;
+    stats();
 }
