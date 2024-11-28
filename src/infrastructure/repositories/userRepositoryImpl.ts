@@ -7,6 +7,7 @@ import {LoginDTO} from "../../core/dto/LoginDTO";
 import {EmailConfig} from "../../config/emailConfig";
 
 
+
 export class UserRepositoryImpl implements UserInterface {
     private readonly userModel;
 
@@ -94,6 +95,10 @@ export class UserRepositoryImpl implements UserInterface {
 
     async show(id: string) {
         return await this.userModel.findById(id)
+    }
+
+    stats() {
+        return this.userModel.countDocuments()
     }
 
 }

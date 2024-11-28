@@ -32,4 +32,8 @@ export class UserUseCase {
     show(id: string){
         return this.userRepository.show(id)
     }
+
+    stats(){
+        return this.userRepository.stats()
+    }
 }

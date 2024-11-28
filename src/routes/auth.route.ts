@@ -15,7 +15,9 @@ authRouter.post("/auth/register", (req, res): void => {
 authRouter.post('/auth/login', (req, res): void => {
     authController.login(req, res);
 })
-
+authRouter.get('/auth/stats', (req, res): void => {
+    authController.stats(req, res);
+})
 authRouter.post('/auth/forgot-password', (req, res): void => {
     authController.forgotPassword(req, res);
 })
