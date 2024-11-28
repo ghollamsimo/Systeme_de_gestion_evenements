@@ -28,4 +28,8 @@ export class UserUseCase {
     resetPassword(resetDTO: ResetDTO): Promise<{ message: string }>{
         return this.userRepository.resetPassword(resetDTO.resetToken, resetDTO.newPassword)
     }
+
+    show(id: string){
+        return this.userRepository.show(id)
+    }
 }
