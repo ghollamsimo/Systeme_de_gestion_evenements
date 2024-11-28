@@ -39,4 +39,10 @@ describe("Authentication Tests", () => {
         expect(show).toBeCalledWith(id)
         expect(show).toBeCalledTimes(1)
     })
+
+    it('should call method of stats', () => {
+        const stats = jest.spyOn(userUseCase, 'stats')
+        userUseCase.stats()
+        expect(stats).toBeCalledTimes(1)
+    })
 });
