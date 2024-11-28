@@ -7,4 +7,5 @@ export interface UserInterface {
     show(id: string)
     forgotPassword(email: string): Promise<void>
     resetPassword(resetToken: string, newPassword: string): Promise<{ message: string }>
+    stats();
 }
