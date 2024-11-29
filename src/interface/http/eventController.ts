@@ -27,22 +27,35 @@ export class EventController{
     }
     async store(req: Request, res: Response): Promise<Response> {
         try {
-            const { title, description , participants} = req.body;
+            const { title, description, participants } = req.body;
             const image = req.file?.filename;
-            const organiser = req.user?.id
+            const organiser = req.user?.id;
             if (!title || !description || !image) {
-                return res.status(400).json({ success: false, message: "All fields are required, including the image" });
+                return res.status(400).json({
+                    success: false,
+                    message: "All fields are required, including the image"
+                });
             }
+            const imagePath = `uploads/${image}`;
 
-            const eventDto: EventDTO = new EventDTO(title, image, description, participants, organiser);
 
+            const eventDto: EventDTO = new EventDTO(title, imagePath, description, participants, organiser);
             const event: EventEntity = await this.eventUseCase.store(eventDto);
-            return res.status(201).json({ success: true, data: event });
+
+            return res.status(201).json({
+                success: true,
+                data: event
+            });
 
         } catch (e) {
-            return res.status(500).json({ success: false, message: e || "An error occurred" });
+            console.error("Error storing event:", e);
+            return res.status(500).json({
+                success: false,
+                message: e || "An error occurred"
+            });
         }
     }
+
 
     async update(req: Request, res: Response) {
         try {
