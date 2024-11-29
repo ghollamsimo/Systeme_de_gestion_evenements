@@ -9,7 +9,7 @@ import organiserRoute from "./routes/organiser.route";
 
 dotenv.config();
 
-const uploadsPath = path.join(__dirname, '../uploads');
+const uploadDir = path.resolve('./uploads');
 
 class Server {
     public app: Application;
@@ -32,6 +32,8 @@ class Server {
 
         this.app.use(express.urlencoded({ extended: true }));
         this.app.use(express.json());
+        this.app.use('/uploads', express.static(uploadDir));
+
     }
 
     private routing(): void {
