@@ -18,8 +18,7 @@ export class OrganiserRepositoryImpl implements OrganiserInterface{
     }
 
     async index(): Promise<UserEntity[]> {
-        const user = await this.userModel.find()
-        return user.map(user => new UserEntity(user.name, user.email, user.password, user.role))
+        return await this.userModel.find({role: 'participant'}).select('_id name email role')
     }
 
     async store(userDto: UserDto): Promise<UserEntity> {
