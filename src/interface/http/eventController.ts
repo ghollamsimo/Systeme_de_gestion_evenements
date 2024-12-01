@@ -61,17 +61,23 @@ export class EventController{
         try {
             const { id } = req.params;
             const organiser = req.user?.id;
-            const { title, image, description, participant } = req.body;
-            if (!title || !image || !description || !participant) {
-                return res.status(400).json({ success: false, message: "All fields are required" });
+            const { title, description, participant } = req.body;
+            const image = req.file?.filename;
+            if (!title || !description || !participant || !image) {
+                return res.status(400).json({ success: false, message: "All fields are required, including the image." });
             }
-            const eventDto: EventDTO = new EventDTO(title, image, description, participant, organiser);
+            const imagePath = `uploads/${image}`;
+
+            const eventDto: EventDTO = new EventDTO(title, imagePath, description, participant, organiser);
             const result = await this.eventUseCase.update(id, eventDto);
+
             return res.status(200).json({ success: true, data: result });
         } catch (e) {
-            res.status(500).json({ success: false, message: e || "An error occurred" });
+            console.error(e);
+            return res.status(500).json({ success: false, message: "An error occurred during event update." });
         }
     }
+
 
     async index(req : Request, res : Response){
         try {
