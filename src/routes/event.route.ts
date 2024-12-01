@@ -30,7 +30,7 @@ eventRouter.delete('/delete/:id', (req, res) => {
     eventController.delete(req, res)
 })
 
-eventRouter.patch('/update/:id',authMiddleware, (req, res) => {
+eventRouter.patch('/update/:id',authMiddleware, upload.single('image') , (req, res) => {
     eventController.update(req, res)
 })
 export default eventRouter

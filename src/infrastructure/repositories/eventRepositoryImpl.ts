@@ -19,8 +19,7 @@ export class EventRepositoryImpl implements EventInterface {
     }
 
     async index(): Promise<EventEntity[]> {
-        const events = await this.eventModel.find().populate('participants').populate('organiser').exec();
-        return events.map(event => new EventEntity(event.title, event.image, event.description, event.participants, event.organiser));
+        return await this.eventModel.find().select('_id title image description participants organiser').populate('participants').populate('organiser').exec()
     }
 
     async store(eventDTO: EventDTO): Promise<EventEntity> {
@@ -53,7 +52,7 @@ export class EventRepositoryImpl implements EventInterface {
         if (!id){
             throw new Error('there is no event with this id')
         }
-        return this.eventModel.findById(id)
+        return this.eventModel.findById(id).populate('participants')
     }
 
     stats() {
